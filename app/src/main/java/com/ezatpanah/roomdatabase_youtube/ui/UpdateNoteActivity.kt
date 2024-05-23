@@ -14,10 +14,8 @@ class UpdateNoteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUpdateNoteBinding
     private val noteDB: NoteDatabase by lazy {
-        Room.databaseBuilder(this, NoteDatabase::class.java, NOTE_DATABASE)
-            .allowMainThreadQueries()
-            .fallbackToDestructiveMigration()
-            .build()
+        Room.databaseBuilder(this, NoteDatabase::class.java, NOTE_DATABASE).allowMainThreadQueries()
+            .fallbackToDestructiveMigration().build()
     }
 
     private lateinit var noteEntity: NoteEntity
@@ -35,28 +33,28 @@ class UpdateNoteActivity : AppCompatActivity() {
         }
 
         binding.apply {
-            defaultTitle=noteDB.doa().getNote(noteId).noteTitle
-            defaultDesc=noteDB.doa().getNote(noteId).noteDesc
+            defaultTitle = noteDB.doa().getNote(noteId).noteTitle
+            defaultDesc = noteDB.doa().getNote(noteId).noteDesc
 
             edtTitle.setText(defaultTitle)
             edtDesc.setText(defaultDesc)
 
             btnDelete.setOnClickListener {
-                noteEntity= NoteEntity(noteId,defaultTitle,defaultDesc)
+                noteEntity = NoteEntity(noteId, defaultTitle, defaultDesc)
                 noteDB.doa().deleteNote(noteEntity)
                 finish()
             }
 
             btnSave.setOnClickListener {
                 val title = edtTitle.text.toString()
-                val desc=edtDesc.text.toString()
-                if (title.isNotEmpty() || desc.isNotEmpty()){
-                    noteEntity= NoteEntity(noteId,title,desc)
+                val desc = edtDesc.text.toString()
+                if (title.isNotEmpty() || desc.isNotEmpty()) {
+                    noteEntity = NoteEntity(noteId, title, desc)
                     noteDB.doa().updateNote(noteEntity)
                     finish()
-                }
-                else{
-                    Snackbar.make(it,"Title and Description cannot be Empty", Snackbar.LENGTH_LONG).show()
+                } else {
+                    Snackbar.make(it, "Title and Description cannot be Empty", Snackbar.LENGTH_LONG)
+                        .show()
                 }
             }
         }

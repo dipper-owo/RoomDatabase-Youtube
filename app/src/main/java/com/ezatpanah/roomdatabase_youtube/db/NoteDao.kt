@@ -21,10 +21,10 @@ interface NoteDao {
 
     // getting all the notes and showing them to the recyclerView in the MainActivity
     @Query("SELECT * FROM $NOTE_TABLE ORDER BY noteId DESC")
-    fun getAllNotes() : MutableList<NoteEntity>
+    fun getAllNotes(): MutableList<NoteEntity>
 
     // selecting one note at a time
     @Query("SELECT * FROM $NOTE_TABLE WHERE noteId LIKE :id")
-    fun getNote(id : Int) : NoteEntity
+    fun getNote(id: Int): NoteEntity
 
 }

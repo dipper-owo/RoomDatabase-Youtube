@@ -13,7 +13,7 @@ import com.ezatpanah.roomdatabase_youtube.db.NoteEntity
 import com.ezatpanah.roomdatabase_youtube.ui.UpdateNoteActivity
 import com.ezatpanah.roomdatabase_youtube.utils.Constants.BUNDLE_NOTE_ID
 
-class NoteAdapter : RecyclerView.Adapter<NoteAdapter.ViewHolder>(){
+class NoteAdapter : RecyclerView.Adapter<NoteAdapter.ViewHolder>() {
     private lateinit var binding: ItemNoteBinding
     private lateinit var context: Context
 
@@ -41,10 +41,10 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.ViewHolder>(){
             binding.apply {
                 //Set text
                 tvTitle.text = item.noteTitle
-                tvDesc.text= item.noteDesc
+                tvDesc.text = item.noteDesc
 
                 root.setOnClickListener {
-                    val intent=Intent(context,UpdateNoteActivity::class.java)
+                    val intent = Intent(context, UpdateNoteActivity::class.java)
                     intent.putExtra(BUNDLE_NOTE_ID, item.noteId)
                     context.startActivity(intent)
                 }
